@@ -16,6 +16,7 @@ export default function NoteDetailsClient({ id }: NoteDetailsClientProps) {
     queryKey: ["note", id],
     queryFn: () => fetchNoteById(id),
     enabled: !!id,
+    refetchOnMount: false, 
   });
 
   if (isPending) return <p>Loading note details...</p>;

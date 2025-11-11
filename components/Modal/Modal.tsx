@@ -14,7 +14,14 @@ export default function Modal({ children, onClose }: Props) {
       if (e.key === "Escape") onClose();
     };
     document.addEventListener("keydown", onEsc);
-    return () => document.removeEventListener("keydown", onEsc);
+
+    const originalOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+
+    return () => {
+      document.removeEventListener("keydown", onEsc);
+      document.body.style.overflow = originalOverflow; 
+    };
   }, [onClose]);
 
   if (typeof window === "undefined") return null;
